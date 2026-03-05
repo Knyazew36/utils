@@ -7,6 +7,7 @@ export default defineConfig({
     'format-phone': 'src/format-phone/index.ts',
     'get-name': 'src/get-name/index.ts',
     'number-separator': 'src/number-separator/index.ts',
+    'ms': 'src/ms/index.ts',
   },
   format: ['esm', 'cjs'],
   dts: true,
