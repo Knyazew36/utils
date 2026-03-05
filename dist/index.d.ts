@@ -9,4 +9,4 @@ type StringValue = `${number}` | `${number}${UnitAnyCase}` | `${number} ${UnitAn
 
 declare function ms(str: StringValue): number;
 
-export { ms };
+export { type StringValue, type Unit, type UnitAnyCase, ms };
