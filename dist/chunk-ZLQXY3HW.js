@@ -1,0 +1,1 @@
+function o(e){let[n,r]=e.toString().split("."),t=n.replace(/\B(?=(\d{3})+(?!\d))/g," ");return r?`${t}.${r}`:t}export{o as a};

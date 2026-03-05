@@ -1,0 +1,1 @@
+export{a as numberSeparator}from'./chunk-ZLQXY3HW.js';

@@ -1,0 +1,1 @@
+export{d as getFullNameString,f as getInitialsString,b as getName,e as getShortNameString,c as isValidFullName,a as normalizeName}from'./chunk-AP76JFVE.js';

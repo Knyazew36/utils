@@ -1,0 +1,1 @@
+function a(s,t){let e=s?.response?.data?.message;return e?typeof s?.response?.data?.message=="object"?t?.[e[0]]||e[0]:e:s?.message}export{a};

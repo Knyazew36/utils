@@ -7,6 +7,7 @@
     "access": "public"
   },
   "license": "ISC",
+  "sideEffects": false,
   "peerDependencies": {},
   "dependencies": {},
   "main": "./dist/index.cjs",
@@ -25,7 +26,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup",
     "release:patch": "yarn build && npm version patch -m \"release: v%s\" && git push --follow-tags",
     "release:minor": "yarn build && npm version minor -m \"release: v%s\" && git push --follow-tags",
     "release:major": "yarn build && npm version major -m \"release: v%s\" && git push --follow-tags",
@@ -43,6 +44,36 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
+    },
+    "./error-catch": {
+      "types": "./dist/error-catch.d.ts",
+      "import": "./dist/error-catch.js",
+      "require": "./dist/error-catch.cjs",
+      "default": "./dist/error-catch.js"
+    },
+    "./format-phone": {
+      "types": "./dist/format-phone.d.ts",
+      "import": "./dist/format-phone.js",
+      "require": "./dist/format-phone.cjs",
+      "default": "./dist/format-phone.js"
+    },
+    "./get-name": {
+      "types": "./dist/get-name.d.ts",
+      "import": "./dist/get-name.js",
+      "require": "./dist/get-name.cjs",
+      "default": "./dist/get-name.js"
+    },
+    "./number-separator": {
+      "types": "./dist/number-separator.d.ts",
+      "import": "./dist/number-separator.js",
+      "require": "./dist/number-separator.cjs",
+      "default": "./dist/number-separator.js"
+    },
+    "./ms": {
+      "types": "./dist/ms.d.ts",
+      "import": "./dist/ms.js",
+      "require": "./dist/ms.cjs",
+      "default": "./dist/ms.js"
     }
   },
   "devDependencies": {

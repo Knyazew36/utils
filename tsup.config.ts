@@ -1,11 +1,17 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'],
-  format: ['esm', 'cjs'], // ESM и CommonJS
-  dts: true, // Генерировать .d.ts файлы
+  entry: {
+    index: 'src/index.ts',
+    'error-catch': 'src/error-catch/index.ts',
+    'format-phone': 'src/format-phone/index.ts',
+    'get-name': 'src/get-name/index.ts',
+    'number-separator': 'src/number-separator/index.ts',
+  },
+  format: ['esm', 'cjs'],
+  dts: true,
   clean: true,
   sourcemap: false,
   minify: true,
-  treeshake: true
+  treeshake: true,
 })
