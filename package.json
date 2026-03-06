@@ -36,6 +36,9 @@
       ],
       "ms": [
         "./dist/ms.d.ts"
+      ],
+      "log": [
+        "./dist/log.d.ts"
       ]
     }
   },
@@ -93,6 +96,11 @@
       "import": "./dist/ms.js",
       "require": "./dist/ms.cjs",
       "default": "./dist/ms.js"
+    },
+    "./log": {
+      "import": "./dist/log.js",
+      "require": "./dist/log.cjs",
+      "default": "./dist/log.js"
     }
   },
   "devDependencies": {

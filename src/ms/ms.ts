@@ -71,6 +71,6 @@ export function ms(str: StringValue): number {
     case 'ms':
       return n
     default:
-      return NaN
+      return n
   }
 }
