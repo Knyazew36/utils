@@ -22,23 +22,8 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "error-catch": [
-        "./dist/error-catch.d.ts"
-      ],
-      "format-phone": [
-        "./dist/format-phone.d.ts"
-      ],
-      "get-name": [
-        "./dist/get-name.d.ts"
-      ],
-      "number-separator": [
-        "./dist/number-separator.d.ts"
-      ],
-      "ms": [
-        "./dist/ms.d.ts"
-      ],
-      "log": [
-        "./dist/log.d.ts"
+      "*": [
+        "./dist/index.d.ts"
       ]
     }
   },
