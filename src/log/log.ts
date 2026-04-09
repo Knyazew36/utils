@@ -13,7 +13,7 @@ const logEmojis = {
   payload: '💾 '
 }
 
-const log = ({ name, data, type, payload, isServer }: LogArgs) => {
+export function log({ name, data, type, payload, isServer }: LogArgs) {
   if (!data) return
 
   console.log('%c ', logStyles[type])
@@ -33,5 +33,3 @@ const log = ({ name, data, type, payload, isServer }: LogArgs) => {
   }
   console.log('%c ', logStyles[type])
 }
-
-export default log

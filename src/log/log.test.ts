@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
-import log from './log'
+import { log } from './log'
 
 describe('log', () => {
   afterEach(() => {
