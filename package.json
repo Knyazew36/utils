@@ -83,6 +83,7 @@
       "default": "./dist/ms.js"
     },
     "./log": {
+      "types": "./dist/log.d.ts",
       "import": "./dist/log.js",
       "require": "./dist/log.cjs",
       "default": "./dist/log.js"
