@@ -1,2 +1,11 @@
+interface LogArgs {
+    name: string;
+    data: unknown;
+    type: 'request' | 'response' | 'catch';
+    payload?: any;
+    isServer?: boolean;
+}
 
-export {  }
+declare function log({ name, data, type, payload, isServer }: LogArgs): void;
+
+export { log };

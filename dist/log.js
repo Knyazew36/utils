@@ -1,1 +1,1 @@
-import'./chunk-5MNJ7ELC.js';
+export{a as log}from'./chunk-32LZX7CH.js';
