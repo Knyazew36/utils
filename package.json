@@ -1,6 +1,6 @@
 {
   "name": "@front-cmdt/utils",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "keywords": [
     "format-phone",
     "get-name",

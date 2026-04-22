@@ -1,4 +1,4 @@
-export { errorCatch } from './error-catch.js';
+export { ErrorCatchMode, ErrorCatchOptions, errorCatch } from './error-catch.js';
 export { formatPhone } from './format-phone.js';
 export { IFullName, IFullNameResult, getFullNameString, getInitialsString, getName, getShortNameString, isValidFullName, normalizeName } from './get-name.js';
 export { log } from './log.js';
