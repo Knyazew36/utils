@@ -13,19 +13,19 @@ const logEmojis = {
   payload: '💾 '
 }
 
-export function log({ name, data, type, payload, isServer }: LogArgs) {
-  if (!data) return
+export function log({ name, data, type, payload, isServer, isDisabled }: LogArgs) {
+  if (!data || isDisabled) return
 
   console.log('%c ', logStyles[type])
   {
     !isServer && console.log('%c ⬇⬇⬇......................................⬇⬇⬇', logStyles[type])
   }
 
-  console.log(`%c ${logEmojis[type]} [${type}] ${name}`, logStyles[type])
+  console.log(`%c ${isServer && '[SERVER] '} ${logEmojis[type]} [${type}] ${name}`, logStyles[type])
   console.log(data)
 
   if (payload) {
-    console.log(`%c ${logEmojis.payload} [payload]`, logStyles[type], payload)
+    console.log(`%c ${isServer && '[SERVER] '} ${logEmojis.payload} [payload]`, logStyles[type], payload)
   }
 
   {

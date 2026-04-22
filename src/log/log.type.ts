@@ -4,4 +4,5 @@ export interface LogArgs {
   type: 'request' | 'response' | 'catch'
   payload?: any
   isServer?: boolean
+  isDisabled?: boolean
 }
