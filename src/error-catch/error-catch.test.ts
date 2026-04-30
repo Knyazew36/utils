@@ -20,10 +20,10 @@ describe('errorCatch', () => {
 
   describe('передаем мапу ошибок', () => {
     it('вернет текст ошибки из мапы ошибок', () => {
-      expect(errorCatch(error, errorTextMap)).toBe('текст ошибки')
+      expect(errorCatch(error, { errorTextMap })).toBe('текст ошибки')
     })
-    it('вернет текст из ошибка, потопу что в мапе нет подходящего ключа', () => {
-      expect(errorCatch(errorBackend, errorTextMap)).toBe('Unauthorized access')
+    it('вернет текст из ошибка, потому что в мапе нет подходящего ключа', () => {
+      expect(errorCatch(errorBackend, { errorTextMap })).toBe('Unauthorized access')
     })
   })
 

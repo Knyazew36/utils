@@ -1,6 +1,11 @@
 {
   "name": "@front-cmdt/utils",
-  "version": "0.0.9",
+  "version": "0.1.9",
+  "description": "Библиотека полезных утилит для фронтенд-разработки",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Knyazew36/utils.git"
+  },
   "keywords": [
     "format-phone",
     "get-name",

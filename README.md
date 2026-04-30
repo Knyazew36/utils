@@ -16,21 +16,53 @@ npm install @front-cmdt/utils
 
 Обработка ошибок из ответов API. Возвращает текст ошибки из переданной мапы сообщений или из самой ошибки.
 
-- **Параметры:** `error` — объект ошибки, `errorTextMap?` — мапа «код/ключ → читаемый текст»
-- **Возвращает:** строка с сообщением об ошибке
+**Сигнатура:**
+
+```typescript
+errorCatch(error: any, options?: ErrorCatchOptions): string | string[]
+```
+
+**`ErrorCatchOptions`:**
+
+| Поле           | Тип                       | По умолчанию | Описание                                                        |
+| -------------- | ------------------------- | ------------ | --------------------------------------------------------------- |
+| `errorTextMap` | `Record<string, string>`  | —            | Мапа «ключ из ответа → читаемый текст»                          |
+| `mode`         | `'first'` \| `'all'`      | `'first'`    | Вернуть первое сообщение (`string`) или все (`string[]`)        |
 
 Поддерживает ошибки с вложенной структурой `error.response.data.message` (в т.ч. когда `message` — массив строк).
 
-```
-export const ERROR_MAP = {
-  'learning must be an object': 'Обучение должно быть объектом'
+**Примеры:**
+
+```typescript
+import { errorCatch } from '@front-cmdt/utils/error-catch'
+
+const ERROR_MAP = {
+  'learning must be an object': 'Обучение должно быть объектом',
 }
 
+// Первое сообщение с маппингом
+try {
+  // ...
+} catch (error: any) {
+  console.log(errorCatch(error, { errorTextMap: ERROR_MAP }))
+  // 'Обучение должно быть объектом'
+}
 
-   } catch (error: any) {
-      console.log(errorCatch(error, ERROR_MAP))
-      // Обучение должно быть объектом
-    }
+// Все сообщения
+try {
+  // ...
+} catch (error: any) {
+  console.log(errorCatch(error, { mode: 'all' }))
+  // ['learning must be an object', 'name must be a string']
+}
+
+// Без опций — вернёт первое сообщение из ответа или error.message
+try {
+  // ...
+} catch (error: any) {
+  console.log(errorCatch(error))
+  // 'Unauthorized access'
+}
 ```
 
 ---
@@ -103,6 +135,7 @@ export const ERROR_MAP = {
 - `type` — тип лога: `'request'` (запрос), `'response'` (ответ), `'catch'` (ошибка)
 - `payload?` — дополнительные данные (опционально)
 - `isServer?` — флаг серверного логирования, убирает декоративные элементы (опционально)
+- `isDisabled?` — отключает логирование полностью, если `true` (опционально)
 
 **Особенности:**
 
