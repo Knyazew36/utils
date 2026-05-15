@@ -1,6 +1,6 @@
 {
   "name": "@front-cmdt/utils",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Библиотека полезных утилит для фронтенд-разработки",
   "repository": {
     "type": "git",
