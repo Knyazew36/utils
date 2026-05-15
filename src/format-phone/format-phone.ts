@@ -1,6 +1,12 @@
 interface IParams {
   phone: string | number
-  variant: '+79999999999' | '79999999999' | '+7(999)999-99-99' | '89999999999' | '+7 999 999 99-99'
+  variant:
+    | '+79999999999'
+    | '79999999999'
+    | '+7(999)999-99-99'
+    | '89999999999'
+    | '+7 999 999 99-99'
+    | '+7(999) 999 99 99'
 }
 
 /**
@@ -49,6 +55,8 @@ export function formatPhone(phone: string | number, variant: IParams['variant'])
       return `7${code}${part1}${part2}${part3}`
     case '+7(999)999-99-99':
       return `+7(${code})${part1}-${part2}-${part3}`
+    case '+7(999) 999 99 99':
+      return `+7(${code}) ${part1} ${part2} ${part3}`
     case '89999999999':
       return `8${code}${part1}${part2}${part3}`
     case '+7 999 999 99-99':
