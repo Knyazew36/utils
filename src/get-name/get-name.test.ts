@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { getName, normalizeName } from '@/get-name'
+import { getName, getNameWithInitialString, normalizeName } from '@/get-name'
 
 describe('ErrorMessages', () => {
   describe.todo('validateName')
@@ -67,4 +67,23 @@ describe('ErrorMessages', () => {
   describe.todo('getNameString')
   describe.todo('getShortNameString')
   describe.todo('getInitialsString')
+
+  describe('getNameWithInitialString', () => {
+    it('вернет пустую строку если данные невалидны', () => {
+      expect(getNameWithInitialString('')).toBe('')
+      expect(getNameWithInitialString(null)).toBe('')
+      expect(getNameWithInitialString(undefined)).toBe('')
+      expect(getName(null).nameWithInitial).toBe('')
+    })
+    it('вернет строку в формате "Анна К."', () => {
+      expect(getNameWithInitialString('Каренина Анна Аркадьевна')).toBe('Анна К.')
+      expect(getNameWithInitialString('каренина анна')).toBe('Анна К.')
+      expect(getNameWithInitialString(['Каренина', 'Анна'])).toBe('Анна К.')
+      expect(getNameWithInitialString({ firstName: 'анна', lastName: 'каренина' })).toBe('Анна К.')
+    })
+    it('вернет только имя или только инициал, если второй части нет', () => {
+      expect(getNameWithInitialString('Анна')).toBe('Анна')
+      expect(getNameWithInitialString({ lastName: 'Каренина' })).toBe('К.')
+    })
+  })
 })

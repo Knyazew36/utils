@@ -13,6 +13,8 @@ export interface IFullName {
 export interface IFullNameResult {
   fullName: string;
   shortName: string;
+  /** Имя и инициал фамилии: «Анна К.» */
+  nameWithInitial: string;
   initials: string;
   isValid: boolean;
   errors: string[];

@@ -67,4 +67,46 @@ describe('errorCatch', () => {
       )
     })
   })
+
+  describe('joinSeparator — joins array of errors into a single string', () => {
+    it('joins errors with "\\n"', () => {
+      expect(
+        errorCatch(errorBackendWithErrors, { priorityErrors: true, mode: 'all', joinSeparator: '\n' })
+      ).toBe('The code has already been taken.\nsecond')
+    })
+
+    it('joins errors with ", "', () => {
+      expect(
+        errorCatch(errorBackendWithErrors, { priorityErrors: true, mode: 'all', joinSeparator: ', ' })
+      ).toBe('The code has already been taken., second')
+    })
+
+    it('joins message array with "\\n"', () => {
+      const err = { response: { data: { message: ['first error', 'second error'] } } }
+      expect(errorCatch(err, { mode: 'all', joinSeparator: '\n' })).toBe('first error\nsecond error')
+    })
+
+    it('without joinSeparator returns array', () => {
+      expect(
+        errorCatch(errorBackendWithErrors, { priorityErrors: true, mode: 'all' })
+      ).toStrictEqual(['The code has already been taken.', 'second'])
+    })
+
+    it('with mode: first joinSeparator has no effect — returns string', () => {
+      expect(
+        errorCatch(errorBackendWithErrors, { priorityErrors: true, mode: 'first', joinSeparator: '\n' })
+      ).toBe('The code has already been taken.')
+    })
+
+    it('empty joinSeparator joins without separator', () => {
+      expect(
+        errorCatch(errorBackendWithErrors, { priorityErrors: true, mode: 'all', joinSeparator: '' })
+      ).toBe('The code has already been taken.second')
+    })
+
+    it('fallback from error.message is joined into a string', () => {
+      const err = new Error('network error')
+      expect(errorCatch(err, { mode: 'all', joinSeparator: '\n' })).toBe('network error')
+    })
+  })
 })

@@ -4,12 +4,21 @@ export type ErrorCatchOptions = {
   mode?: ErrorCatchMode
   errorTextMap?: Record<string, string>
   priorityErrors?: boolean
+  joinSeparator?: string
 }
 
 export function errorCatch(error: any, options?: ErrorCatchOptions): string | string[] {
   const mode = options?.mode ?? 'first'
   const errorTextMap = options?.errorTextMap
   const priorityErrors = options?.priorityErrors ?? false
+  const joinSeparator = options?.joinSeparator
+
+  const maybeJoin = (result: string | string[]): string | string[] => {
+    if (joinSeparator !== undefined && Array.isArray(result)) {
+      return result.join(joinSeparator)
+    }
+    return result
+  }
 
   // Поддержка обоих форматов:
   // 1) error.response.data.{message, errors}
@@ -43,7 +52,7 @@ export function errorCatch(error: any, options?: ErrorCatchOptions): string | st
   if (priorityErrors) {
     const byErrors = fromErrors()
     if (byErrors !== undefined) {
-      return byErrors
+      return maybeJoin(byErrors)
     }
   }
 
@@ -53,13 +62,13 @@ export function errorCatch(error: any, options?: ErrorCatchOptions): string | st
     if (!priorityErrors) {
       const byErrors = fromErrors()
       if (byErrors !== undefined) {
-        return byErrors
+        return maybeJoin(byErrors)
       }
     }
 
     const fallback = error?.message
     if (mode === 'all') {
-      return fallback != null && fallback !== '' ? [String(fallback)] : []
+      return maybeJoin(fallback != null && fallback !== '' ? [String(fallback)] : [])
     }
     return fallback
   }
@@ -71,7 +80,7 @@ export function errorCatch(error: any, options?: ErrorCatchOptions): string | st
       const mapped = message.map((item: unknown) => mapMessage(item))
 
       if (mode === 'all') {
-        return mapped
+        return maybeJoin(mapped)
       }
       return mapped[0] ?? ''
     }
@@ -80,7 +89,7 @@ export function errorCatch(error: any, options?: ErrorCatchOptions): string | st
     const one = mapMessage(first)
 
     if (mode === 'all') {
-      return [one]
+      return maybeJoin([one])
     }
     return one
   }
@@ -89,7 +98,7 @@ export function errorCatch(error: any, options?: ErrorCatchOptions): string | st
   const mapped = mapMessage(message)
 
   if (mode === 'all') {
-    return [mapped]
+    return maybeJoin([mapped])
   }
   return mapped
 }

@@ -14,7 +14,7 @@ npm install @front-cmdt/utils
 
 ### errorCatch
 
-Обработка ошибок из ответов API. Возвращает текст ошибки из переданной мапы сообщений или из самой ошибки.
+Обработка ошибок из ответов API. Поддерживает вложенную структуру `error.response.data` (Axios и аналоги) и плоскую `error.message`/`error.errors`. Возвращает строку или массив строк в зависимости от опций.
 
 **Сигнатура:**
 
@@ -24,45 +24,49 @@ errorCatch(error: any, options?: ErrorCatchOptions): string | string[]
 
 **`ErrorCatchOptions`:**
 
-| Поле           | Тип                       | По умолчанию | Описание                                                        |
-| -------------- | ------------------------- | ------------ | --------------------------------------------------------------- |
-| `errorTextMap` | `Record<string, string>`  | —            | Мапа «ключ из ответа → читаемый текст»                          |
-| `mode`         | `'first'` \| `'all'`      | `'first'`    | Вернуть первое сообщение (`string`) или все (`string[]`)        |
+| Поле             | Тип                      | По умолчанию | Описание                                                                                       |
+| ---------------- | ------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| `mode`           | `'first'` \| `'all'`     | `'first'`    | Вернуть первое сообщение (`string`) или все (`string[]`)                                       |
+| `errorTextMap`   | `Record<string, string>` | —            | Мапа «ключ из ответа → читаемый текст»                                                         |
+| `priorityErrors` | `boolean`                | `false`      | Если `true` — сначала берёт из `error.errors`, а `message` используется как запасной вариант   |
+| `joinSeparator`  | `string`                 | —            | Если задан, массив ошибок (`mode: 'all'`) объединяется в одну строку с этим разделителем       |
 
-Поддерживает ошибки с вложенной структурой `error.response.data.message` (в т.ч. когда `message` — массив строк).
+> Когда `joinSeparator` задан, возвращаемое значение всегда `string`, даже при `mode: 'all'`.
+
+**Поддерживаемые форматы ошибки:**
+
+```
+error.response.data.message  — строка, массив строк или объект
+error.response.data.errors   — объект вида { field: string[] }
+error.message                — нативный JS Error (используется как запасной вариант)
+```
 
 **Примеры:**
 
 ```typescript
 import { errorCatch } from '@front-cmdt/utils/error-catch'
 
-const ERROR_MAP = {
-  'learning must be an object': 'Обучение должно быть объектом',
-}
+// Первое сообщение (по умолчанию)
+errorCatch(error)
+// 'Unauthorized access'
 
-// Первое сообщение с маппингом
-try {
-  // ...
-} catch (error: any) {
-  console.log(errorCatch(error, { errorTextMap: ERROR_MAP }))
-  // 'Обучение должно быть объектом'
-}
+// Все сообщения → string[]
+errorCatch(error, { mode: 'all' })
+// ['learning must be an object', 'name must be a string']
 
-// Все сообщения
-try {
-  // ...
-} catch (error: any) {
-  console.log(errorCatch(error, { mode: 'all' }))
-  // ['learning must be an object', 'name must be a string']
-}
+// Все сообщения → одна строка
+errorCatch(error, { mode: 'all', joinSeparator: '\n' })
+// 'learning must be an object\nname must be a string'
 
-// Без опций — вернёт первое сообщение из ответа или error.message
-try {
-  // ...
-} catch (error: any) {
-  console.log(errorCatch(error))
-  // 'Unauthorized access'
-}
+// С переводом ключей
+errorCatch(error, {
+  errorTextMap: { 'learning must be an object': 'Обучение должно быть объектом' },
+})
+// 'Обучение должно быть объектом'
+
+// priorityErrors: брать из errors раньше, чем из message
+errorCatch(error, { priorityErrors: true, mode: 'all', joinSeparator: ', ' })
+// 'The code has already been taken., second'
 ```
 
 ---
