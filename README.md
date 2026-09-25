@@ -103,19 +103,19 @@ pluralize(count: number, forms: [one, few, many], options?: PluralizeOptions): s
 
 | Поле        | Тип       | По умолчанию | Описание                                          |
 | ----------- | --------- | ------------ | ------------------------------------------------- |
-| `withCount` | `boolean` | `false`      | Добавить число перед словом                       |
-| `separator` | `boolean` | `false`      | Разделять тысячи пробелом (только с `withCount`) |
+| `withCount` | `boolean` | `true`       | Выводить число перед словом (`false` — только слово) |
+| `separator` | `boolean` | `false`      | Разделять тысячи пробелом (не при `withCount: false`) |
 
 **Примеры:**
 
 ```typescript
 import { pluralize } from '@front-cmdt/utils/pluralize'
 
-pluralize(1, ['товар', 'товара', 'товаров']) // 'товар'
-pluralize(3, ['товар', 'товара', 'товаров']) // 'товара'
-pluralize(11, ['товар', 'товара', 'товаров']) // 'товаров'
-pluralize(21, ['товар', 'товара', 'товаров'], { withCount: true }) // '21 товар'
-pluralize(1000, ['товар', 'товара', 'товаров'], { withCount: true, separator: true }) // '1 000 товаров'
+pluralize(1, ['товар', 'товара', 'товаров']) // '1 товар'
+pluralize(3, ['товар', 'товара', 'товаров']) // '3 товара'
+pluralize(11, ['товар', 'товара', 'товаров']) // '11 товаров'
+pluralize(21, ['товар', 'товара', 'товаров'], { withCount: false }) // 'товар'
+pluralize(1000, ['товар', 'товара', 'товаров'], { separator: true }) // '1 000 товаров'
 ```
 
 ---
