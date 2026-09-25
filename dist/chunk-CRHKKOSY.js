@@ -1,0 +1,1 @@
+import {a}from'./chunk-ZLQXY3HW.js';function l(r,n,e={}){let t=n[o(r)];return e.withCount?`${e.separator?a(r):String(r)} ${t}`:t}function o(r){if(!Number.isFinite(r))return 2;if(!Number.isInteger(r))return 1;let n=Math.abs(r),e=n%100,t=n%10;return e>=11&&e<=14?2:t===1?0:t>=2&&t<=4?1:2}export{l as a};

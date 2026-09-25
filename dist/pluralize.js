@@ -1,0 +1,1 @@
+export{a as pluralize}from'./chunk-CRHKKOSY.js';import'./chunk-ZLQXY3HW.js';

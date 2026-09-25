@@ -2,9 +2,9 @@
  * Интерфейс для ФИО
  */
 interface IFullName {
-    firstName?: string;
-    lastName?: string;
-    middleName?: string;
+    firstName?: string | null | undefined;
+    lastName?: string | null | undefined;
+    middleName?: string | null | undefined;
 }
 /**
  * Интерфейс для результата функции
@@ -46,7 +46,7 @@ declare function normalizeName(name: string): string;
  * getName(['Каренина', 'Анна']).fullName // 'Каренина Анна'
  * getName(null).errors // ['ФИО не предоставлено']
  */
-declare function getName(input: IFullName | string | string[] | null | undefined): IFullNameResult;
+declare function getName(input: IFullName | string | (string | null | undefined)[] | null | undefined): IFullNameResult;
 /**
  * Проверка валидности ФИО
  * @param input - ФИО для проверки
@@ -57,7 +57,7 @@ declare function getName(input: IFullName | string | string[] | null | undefined
  * isValidFullName('Каренина 123') // false
  * isValidFullName('') // false
  */
-declare function isValidFullName(input: IFullName | string | string[] | null | undefined): boolean;
+declare function isValidFullName(input: IFullName | string | (string | null | undefined)[] | null | undefined): boolean;
 /**
  * Получение только полного имени без проверок
  * @param input - ФИО
@@ -66,7 +66,7 @@ declare function isValidFullName(input: IFullName | string | string[] | null | u
  * getFullNameString('каренина анна аркадьевна') // 'Каренина Анна Аркадьевна'
  * getFullNameString({ firstName: 'Анна', lastName: 'Каренина' }) // 'Каренина Анна'
  */
-declare function getFullNameString(input: IFullName | string | string[] | null | undefined): string;
+declare function getFullNameString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string;
 /**
  * Получение короткого имени (имя + фамилия)
  * @param input - ФИО
@@ -75,7 +75,7 @@ declare function getFullNameString(input: IFullName | string | string[] | null |
  * getShortNameString('Каренина Анна Аркадьевна') // 'Анна Каренина'
  * getShortNameString({ firstName: 'Анна' }) // 'Анна'
  */
-declare function getShortNameString(input: IFullName | string | string[] | null | undefined): string;
+declare function getShortNameString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string;
 /**
  * Получение имени с инициалом фамилии («Анна К.»)
  * @param input - ФИО
@@ -85,7 +85,7 @@ declare function getShortNameString(input: IFullName | string | string[] | null 
  * getNameWithInitialString({ firstName: 'Анна', lastName: 'Каренина' }) // 'Анна К.'
  * getNameWithInitialString('Анна') // 'Анна'
  */
-declare function getNameWithInitialString(input: IFullName | string | string[] | null | undefined): string;
+declare function getNameWithInitialString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string;
 /**
  * Получение инициалов
  * @param input - ФИО
@@ -94,6 +94,6 @@ declare function getNameWithInitialString(input: IFullName | string | string[] |
  * getInitialsString('Каренина Анна Аркадьевна') // 'К.А.А.'
  * getInitialsString(['Каренина', 'Анна']) // 'К.А.'
  */
-declare function getInitialsString(input: IFullName | string | string[] | null | undefined): string;
+declare function getInitialsString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string;
 
 export { type IFullName, type IFullNameResult, getFullNameString, getInitialsString, getName, getNameWithInitialString, getShortNameString, isValidFullName, normalizeName };

@@ -4,3 +4,4 @@ export { IFullName, IFullNameResult, getFullNameString, getInitialsString, getNa
 export { log } from './log.cjs';
 export { StringValue, Unit, UnitAnyCase, ms } from './ms.cjs';
 export { numberSeparator } from './number-separator.cjs';
+export { PluralForms, PluralizeOptions, pluralize } from './pluralize.cjs';
