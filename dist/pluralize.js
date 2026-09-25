@@ -1,1 +1,1 @@
-export{a as pluralize}from'./chunk-CRHKKOSY.js';import'./chunk-ZLQXY3HW.js';
+export{a as pluralize}from'./chunk-PTMNNBJF.js';import'./chunk-ZLQXY3HW.js';
