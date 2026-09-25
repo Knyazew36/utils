@@ -10,7 +10,8 @@
     "format-phone",
     "get-name",
     "number-separator",
-    "ms"
+    "ms",
+    "pluralize"
   ],
   "type": "module",
   "publishConfig": {
@@ -92,6 +93,12 @@
       "import": "./dist/log.js",
       "require": "./dist/log.cjs",
       "default": "./dist/log.js"
+    },
+    "./pluralize": {
+      "types": "./dist/pluralize.d.ts",
+      "import": "./dist/pluralize.js",
+      "require": "./dist/pluralize.cjs",
+      "default": "./dist/pluralize.js"
     }
   },
   "devDependencies": {

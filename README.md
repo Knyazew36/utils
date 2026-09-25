@@ -89,6 +89,37 @@ errorCatch(error, { priorityErrors: true, mode: 'all', joinSeparator: ', ' })
 
 ---
 
+### pluralize
+
+Склонение слова по числу (правила русского языка): `1 товар`, `2 товара`, `5 товаров`. Дробные числа берут вторую форму (`1,5 часа`).
+
+**Сигнатура:**
+
+```typescript
+pluralize(count: number, forms: [one, few, many], options?: PluralizeOptions): string
+```
+
+**`PluralizeOptions`:**
+
+| Поле        | Тип       | По умолчанию | Описание                                          |
+| ----------- | --------- | ------------ | ------------------------------------------------- |
+| `withCount` | `boolean` | `false`      | Добавить число перед словом                       |
+| `separator` | `boolean` | `false`      | Разделять тысячи пробелом (только с `withCount`) |
+
+**Примеры:**
+
+```typescript
+import { pluralize } from '@front-cmdt/utils/pluralize'
+
+pluralize(1, ['товар', 'товара', 'товаров']) // 'товар'
+pluralize(3, ['товар', 'товара', 'товаров']) // 'товара'
+pluralize(11, ['товар', 'товара', 'товаров']) // 'товаров'
+pluralize(21, ['товар', 'товара', 'товаров'], { withCount: true }) // '21 товар'
+pluralize(1000, ['товар', 'товара', 'товаров'], { withCount: true, separator: true }) // '1 000 товаров'
+```
+
+---
+
 ### formatPhone
 
 Форматирование российского телефонного номера по одному из заданных шаблонов.

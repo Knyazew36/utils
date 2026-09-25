@@ -2,9 +2,9 @@
  * Интерфейс для ФИО
  */
 export interface IFullName {
-  firstName?: string;
-  lastName?: string;
-  middleName?: string;
+  firstName?: string | null | undefined;
+  lastName?: string | null | undefined;
+  middleName?: string | null | undefined;
 }
 
 /**

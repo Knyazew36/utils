@@ -83,7 +83,7 @@ function getInitials(firstName?: string, lastName?: string, middleName?: string)
  * getName(['Каренина', 'Анна']).fullName // 'Каренина Анна'
  * getName(null).errors // ['ФИО не предоставлено']
  */
-export function getName(input: IFullName | string | string[] | null | undefined): IFullNameResult {
+export function getName(input: IFullName | string | (string | null | undefined)[] | null | undefined): IFullNameResult {
   const errors: string[] = []
   let firstName = ''
   let lastName = ''
@@ -192,7 +192,7 @@ export function getName(input: IFullName | string | string[] | null | undefined)
  * isValidFullName('Каренина 123') // false
  * isValidFullName('') // false
  */
-export function isValidFullName(input: IFullName | string | string[] | null | undefined): boolean {
+export function isValidFullName(input: IFullName | string | (string | null | undefined)[] | null | undefined): boolean {
   return getName(input).isValid
 }
 
@@ -204,7 +204,7 @@ export function isValidFullName(input: IFullName | string | string[] | null | un
  * getFullNameString('каренина анна аркадьевна') // 'Каренина Анна Аркадьевна'
  * getFullNameString({ firstName: 'Анна', lastName: 'Каренина' }) // 'Каренина Анна'
  */
-export function getFullNameString(input: IFullName | string | string[] | null | undefined): string {
+export function getFullNameString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string {
   return getName(input).fullName
 }
 
@@ -216,7 +216,7 @@ export function getFullNameString(input: IFullName | string | string[] | null | 
  * getShortNameString('Каренина Анна Аркадьевна') // 'Анна Каренина'
  * getShortNameString({ firstName: 'Анна' }) // 'Анна'
  */
-export function getShortNameString(input: IFullName | string | string[] | null | undefined): string {
+export function getShortNameString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string {
   return getName(input).shortName
 }
 
@@ -229,7 +229,7 @@ export function getShortNameString(input: IFullName | string | string[] | null |
  * getNameWithInitialString({ firstName: 'Анна', lastName: 'Каренина' }) // 'Анна К.'
  * getNameWithInitialString('Анна') // 'Анна'
  */
-export function getNameWithInitialString(input: IFullName | string | string[] | null | undefined): string {
+export function getNameWithInitialString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string {
   return getName(input).nameWithInitial
 }
 
@@ -241,6 +241,6 @@ export function getNameWithInitialString(input: IFullName | string | string[] | 
  * getInitialsString('Каренина Анна Аркадьевна') // 'К.А.А.'
  * getInitialsString(['Каренина', 'Анна']) // 'К.А.'
  */
-export function getInitialsString(input: IFullName | string | string[] | null | undefined): string {
+export function getInitialsString(input: IFullName | string | (string | null | undefined)[] | null | undefined): string {
   return getName(input).initials
 }
